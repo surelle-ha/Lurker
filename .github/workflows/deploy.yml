@@ -4,6 +4,9 @@ on:
     push:
         branches:
             - main
+            - ci/*
+            - feature/*
+            - test/*
 
 jobs:
     publish-gpr:
