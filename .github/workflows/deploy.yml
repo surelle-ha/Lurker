@@ -20,9 +20,8 @@ jobs:
           registry-url: 'https://npm.pkg.github.com/'
           scope: 'surelle-ha'
 
-      - run: npm ci --legacy-peer-deps
-      - run: npm run build
-
+      - run: npm install --legacy-peer-deps
+      - run: tsc --build
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
