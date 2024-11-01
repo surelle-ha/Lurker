@@ -1,5 +1,5 @@
 {
-    "name": "@bismuth/lurker",
+    "name": "@bismuthjs/lurker",
     "version": "1.0.0",
     "author": "surelle-ha",
     "description": "Lurker is a CLI tool to securely export/import a whole directory.",
