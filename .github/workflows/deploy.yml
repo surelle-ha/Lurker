@@ -1,0 +1,35 @@
+name: RCN Registry
+
+on:
+    push:
+        branches:
+            - main
+
+jobs:
+    publish-gpr:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v2
+
+            - uses: actions/setup-node@v1
+              with:
+                  node-version: 20
+                  registry-url: https://npm.pkg.github.com/
+                  scope: "@surelle-ha"
+
+            - run: npm install
+
+            - run: npm run build
+
+            - name: Commit changes if needed
+              run: |
+                  git config --local user.email "action@github.com"
+                  git config --local user.name "GitHub Action"
+                  if [[ $(git status --porcelain) ]]; then
+                    git add .
+                    git commit -m "Build artifacts generated"
+                  fi
+
+            - run: npx lerna publish from-package --yes
+              env:
+                  NODE_AUTH_TOKEN: ${{ secrets.GH_PAT }}
