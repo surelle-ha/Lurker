@@ -1,4 +1,4 @@
-name: RCN Registry
+name: Registry
 
 on:
     push:
@@ -17,19 +17,9 @@ jobs:
                   registry-url: https://npm.pkg.github.com/
                   scope: "@surelle-ha"
 
+            - run: npm ci
             - run: npm install
-
             - run: npm run build
-
-            - name: Commit changes if needed
-              run: |
-                  git config --local user.email "action@github.com"
-                  git config --local user.name "GitHub Action"
-                  if [[ $(git status --porcelain) ]]; then
-                    git add .
-                    git commit -m "Build artifacts generated"
-                  fi
-
-            - run: npx lerna publish from-package --yes
+            - run: npm publish
               env:
-                  NODE_AUTH_TOKEN: ${{ secrets.GH_PAT }}
+                  NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
