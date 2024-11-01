@@ -1,27 +1,28 @@
 name: Registry
 
 on:
-    push:
-        branches:
-            - main
-            - ci/*
-            - feature/*
-            - test/*
+  push:
+    branches:
+      - main
+      - ci/*
+      - feature/*
+      - test/*
 
 jobs:
-    publish-gpr:
-        runs-on: ubuntu-latest
-        steps:
-            - uses: actions/checkout@v2
+  publish-gpr:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
 
-            - uses: actions/setup-node@v1
-              with:
-                  node-version: 20
-                  registry-url: https://npm.pkg.github.com/
-                  scope: "@surelle-ha"
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+          registry-url: 'https://npm.pkg.github.com/'
+          scope: 'surelle-ha'
 
-            - run: npm install --legacy-peer-deps
-            - run: npm run build
-            - run: npm publish
-              env:
-                  NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - run: npm install --legacy-peer-deps
+      - run: npm run build
+
+      - run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
