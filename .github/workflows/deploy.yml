@@ -21,6 +21,7 @@ jobs:
           scope: 'surelle-ha'
 
       - run: npm install --legacy-peer-deps
+      - run: npm install --save-dev @types/node --legacy-peer-deps
       - run: tsc --build
       - run: npm publish
         env:
