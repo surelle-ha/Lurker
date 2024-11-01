@@ -1,8 +1,11 @@
 {
-    "name": "lurker",
+    "name": "@surelle-ha/lurker",
     "version": "1.0.0",
     "author": "surelle-ha",
     "description": "Lurker is a CLI tool to securely export/import a whole directory.",
+    "repository": {
+        "url": "https://github.com/surelle-ha/lurker.git"
+    },
     "keywords": [
         "cli",
         "crypto",
